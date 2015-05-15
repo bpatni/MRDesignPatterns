@@ -1,5 +1,6 @@
 package mapreduce.patterns.summarization;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,7 +12,8 @@ public class MedianStdDevReducer extends Reducer<IntWritable, IntWritable, IntWr
 	private MedianStdDevTuple result = new MedianStdDevTuple();
 	private ArrayList<Float> commentLengths = new ArrayList<Float>(); 
 	
-	public void reduce(IntWritable key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException{
+	public void reduce(IntWritable key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException  
+	{
 
 		float sum = 0;
 		float count = 0;
@@ -28,11 +30,12 @@ public class MedianStdDevReducer extends Reducer<IntWritable, IntWritable, IntWr
 		Collections.sort(commentLengths);
 		
 		//If the collection length is even the average the 2 middle numbers
-		if (count % 2 ==0) {
-			result.setMedian((commentLengths.get((int) count/2 -1) + commentLengths.get((int) count))/2 );
+		System.err.println("count = " + count);
+		if (count > 0 && count % 2 ==0) {
+			result.setMedian((commentLengths.get((int) count/2 -1) + commentLengths.get((int) count/2)) );
 		}
 		else {
-			result.setMedian(commentLengths.get((int) count)/2);
+			result.setMedian(commentLengths.get((int) count/2));
 		}
 		
 		//calculate standard deviation

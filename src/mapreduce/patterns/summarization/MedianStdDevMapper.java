@@ -23,14 +23,20 @@ public class MedianStdDevMapper extends Mapper<Object, Text, IntWritable, IntWri
 		Map<String, String> parsed = MRDPUtils.transformXmlToMap(value.toString());
 		
 		//Extract CreationDate Field
-		String strCreationDate = parsed.get("CreationDate");
+		String strCreationDate;
 		Date creationDate;
 		try {
+			strCreationDate = parsed.get("CreationDate");
 			creationDate = frmt.parse(strCreationDate);
 			outHour.set(creationDate.getHours());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return;			
 		}
 		
 		//Extract Comment to find the length

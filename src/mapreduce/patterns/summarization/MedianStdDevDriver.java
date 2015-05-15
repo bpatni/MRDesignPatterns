@@ -27,7 +27,7 @@ public class MedianStdDevDriver {
 		job.setMapperClass(MedianStdDevMapper.class);
 		job.setReducerClass(MedianStdDevReducer.class);
 		job.setOutputKeyClass(IntWritable.class);
-		job.setOutputValueClass(MedianStdDevTuple.class);
+		job.setOutputValueClass(IntWritable.class);
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 		

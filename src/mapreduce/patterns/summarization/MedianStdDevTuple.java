@@ -41,5 +41,15 @@ public class MedianStdDevTuple implements Writable {
 		return this.stdDev;
 	}
 
+	public String toString() {
+		
+		String retString = "";
+		try
+		{
+		retString = median + "\t" + stdDev;
+		}
+		catch (Exception e) {}
+		return retString;
+	}
 	
 }
