@@ -11,7 +11,8 @@ public class MinMaxCountReducer extends Reducer<Text, MinMaxCountTuple, Text, Mi
 	//Output value Writable
 	private MinMaxCountTuple result = new MinMaxCountTuple();
 	
-	public void reduce(Text key, Iterable<MinMaxCountTuple> values, Context context) throws IOException, InterruptedException {
+	public void reduce(Text key, Iterable<MinMaxCountTuple> values, Context context) 
+			throws IOException, InterruptedException {
 		//initialize the result
 		result.setMin(new Date());
 		result.setMax(new Date());
